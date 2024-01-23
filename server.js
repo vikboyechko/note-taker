@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, "public")))
     )
 
     .get("/api/notes", getNotes)
+    .get("/api/notes/:id", readNote)
 
     .post("/api/notes", postNotes)
 
@@ -30,6 +31,27 @@ function getNotes(req, res) {
     res.send(notes);
 }
 
+function readNote(req, res) {
+    const id = req.params.id;
+
+    // Read all notes from the file
+    const notesFilePath = path.join(__dirname, "./db/db.json");
+    const notesContent = fs.readFileSync(notesFilePath, "utf-8");
+    const allNotes = JSON.parse(notesContent);
+
+    console.log("Note ID:", id);
+    console.log("All Notes:", allNotes);
+
+    // Find the note with the specified ID
+    const singleNote = allNotes.find((note) => note.id === id);
+
+    if (singleNote) {
+        res.json(singleNote);
+    } else {
+        res.status(404).json({ status: "error", message: "Note not found" });
+    }
+}
+
 function postNotes(req, res) {
     console.info("POST request received to add a note");
     console.log(req.body);
@@ -39,7 +61,7 @@ function postNotes(req, res) {
         const newNote = {
             title,
             text,
-            noteID: crypto.randomUUID(),
+            id: crypto.randomUUID(),
         };
 
         // Load existing notes

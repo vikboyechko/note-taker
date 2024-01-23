@@ -6,21 +6,36 @@
   {
     "title": "asdf",
     "text": "dfs",
-    "noteID": "4552b1fb-322d-4afe-ad6d-cf048feab5e7"
+    "id": "4552b1fb-322d-4afe-ad6d-cf048feab5e7"
   },
   {
     "title": "fasdfdf",
     "text": "asdfasdf",
-    "noteID": "9f6339f2-afd2-48ca-ae7a-d27ed443e8de"
+    "id": "9f6339f2-afd2-48ca-ae7a-d27ed443e8de"
   },
   {
     "title": "f324qf",
     "text": "adsf3",
-    "noteID": "9c697d84-f8e7-4d62-80c4-c0d4d7de793a"
+    "id": "9c697d84-f8e7-4d62-80c4-c0d4d7de793a"
   },
   {
     "title": "testing insomina",
     "text": "testing text",
-    "noteID": "190d9bdf-415d-4f98-b771-e4e432c32142"
+    "id": "190d9bdf-415d-4f98-b771-e4e432c32142"
+  },
+  {
+    "title": "testing new note",
+    "text": "note id working?",
+    "id": "137ea2ea-7e59-49b8-bd7f-9ac3bace355b"
+  },
+  {
+    "title": "okay dokay",
+    "text": "dasdflkasdf",
+    "id": "432fa114-c0e6-40b9-aaab-dabe517ccdb8"
+  },
+  {
+    "title": "anoter test",
+    "text": "another test",
+    "id": "68b9f74f-8a33-41f9-b958-b703c26dc869"
   }
 ]
