@@ -1,21 +1,7 @@
 [
   {
-    "title": "Test Title",
-    "text": "Test text"
-  },
-  {
-    "title": "asdf",
-    "text": "dfs",
-    "id": "4552b1fb-322d-4afe-ad6d-cf048feab5e7"
-  },
-  {
-    "title": "testing insomina",
-    "text": "testing text",
-    "id": "190d9bdf-415d-4f98-b771-e4e432c32142"
-  },
-  {
-    "title": "anoter test",
-    "text": "another test",
-    "id": "68b9f74f-8a33-41f9-b958-b703c26dc869"
+    "title": "Take out the Garbage",
+    "text": "Remember to take out the trash on Tuesday night",
+    "id": "112751ea-5dc9-4645-beab-5182f8433ca9"
   }
 ]
