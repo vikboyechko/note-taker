@@ -11,42 +11,58 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")))
 
     .use(express.urlencoded({ extended: true }))
+    .use(express.json())
 
     .get("/notes", (req, res) =>
         res.sendFile(path.join(__dirname, "/public/notes.html"))
     )
 
-    .get("/api/notes", (req, res) => res.send(getNotes()))
+    .get("/api/notes", getNotes)
 
-    .post("/api/notes", (req, res) => res.send(postNotes()))
+    .post("/api/notes", postNotes)
 
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-function getNotes() {
+function getNotes(req, res) {
     const notesFilePath = path.join(__dirname, "./db/db.json");
     const notesContent = fs.readFileSync(notesFilePath, "utf-8");
-    return JSON.parse(notesContent);
+    const notes = JSON.parse(notesContent);
+    res.send(notes);
 }
 
 function postNotes(req, res) {
-    console.info(`${req.method} request received to add a note`);
+    console.info("POST request received to add a note");
+    console.log(req.body);
+    const { title, text } = req.body;
 
-    const { title, note } = req.body;
-
-    if (title && note) {
+    if (title && text) {
         const newNote = {
             title,
-            note,
+            text,
             noteID: crypto.randomUUID(),
         };
-        const noteString = JSON.stringify(newNote);
-    }
 
-    fs.writeFile("./db/db.json", noteString, (err) =>
-        err
-            ? console.error(err)
-            : console.log(
-                  `New note: ${newNote.title} has been written to JSON file`
-              )
-    );
+        // Load existing notes
+        const notesFilePath = path.join(__dirname, "./db/db.json");
+        const notesContent = fs.readFileSync(notesFilePath, "utf-8");
+        const existingNotes = JSON.parse(notesContent);
+
+        // Add the new note
+        existingNotes.push(newNote);
+
+        // Write back to the file
+        fs.writeFileSync(
+            notesFilePath,
+            JSON.stringify(existingNotes, null, 2),
+            "utf-8"
+        );
+
+        console.log(`New note: ${newNote.title} has been written to JSON file`);
+        res.status(201).json({ status: "success", data: newNote });
+    } else {
+        res.status(400).json({
+            status: "error",
+            message: "Invalid request body",
+        });
+    }
 }
